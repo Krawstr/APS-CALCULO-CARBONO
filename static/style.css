@@ -173,3 +173,23 @@
       line-height: 1.6;
       margin: 20px 0;
   }
+
+  .form-redirect-link {
+    display: block;
+    text-align: center;
+    margin: 15px auto 0 auto;
+    padding: 10px 15px;
+    width: fit-content;
+    border-radius: 8px;
+    background-color: #40414f;
+    color: #ececf1;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    }
+    
+    .form-redirect-link:hover {
+        background-color: #5a5b61;
+        text-decoration: none;
+    }

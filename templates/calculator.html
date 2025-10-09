@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório - Pegada de Carbono</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='calculator.css') }}">
+</head>
+<body>
+    <div class="report-container">
+        <header class="report-header">
+            <h1>Sua Pegada de Carbono Mensal</h1>
+            <p>Com base nas informações fornecidas, este é o resumo das suas emissões.</p>
+        </header>
+
+        <div class="chart-area">
+            <canvas id="footprint-chart"></canvas>
+        </div>
+
+        <div class="narrative-area">
+            <h2>Relatório Personalizado</h2>
+            <p id="narrative-report">{{ report_data.narrative_report }}</p>
+        </div>
+
+        <a href="/" class="back-button">← Voltar ao Chat</a>
+    </div>
+
+    <script>
+        const reportData = JSON.parse('{{ report_data | tojson | safe }}');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('footprint-chart').getContext('2d');
+            
+            const chartDetails = reportData.data_for_dashboard.details_kg_co2e;
+            const totalEmissions = reportData.data_for_dashboard.total_kg_co2e;
+
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(chartDetails),
+                    datasets: [{
+                        data: Object.values(chartDetails),
+                        backgroundColor: ['#7e57c2', '#19c37d', '#fbc02d', '#ff6384'],
+                        borderColor: '#2a2b32', // Cor de fundo da página
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top', labels: { color: '#ececf1', font: { size: 14 } } },
+                        title: { 
+                            display: true, 
+                            text: `Total: ${totalEmissions} kg CO2e`, 
+                            color: '#ececf1',
+                            font: { size: 18 }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

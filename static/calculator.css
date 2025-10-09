@@ -1,0 +1,73 @@
+/* static/calculator.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #343541;
+    color: #ececf1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.report-container {
+    background-color: #2a2b32;
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.report-header h1 {
+    font-size: 2em;
+    margin-bottom: 8px;
+}
+
+.report-header p {
+    font-size: 1.1em;
+    color: #b4b4be;
+    margin-bottom: 40px;
+}
+
+.chart-area {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto 40px auto;
+}
+
+.narrative-area h2 {
+    font-size: 1.5em;
+    margin-bottom: 16px;
+    border-top: 1px solid #4d4d4f;
+    padding-top: 40px;
+}
+
+.narrative-area p {
+    text-align: left;
+    line-height: 1.7;
+    color: #dcdce0;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 12px 24px;
+    background-color: #40414f;
+    color: #ececf1;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.back-button:hover {
+    background-color: #5a5b61;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Manual</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <header class="form-header">
+            <h1>Calculadora Manual</h1>
+            <p>Insira as suas médias mensais para calcular a sua pegada de carbono.</p>
+        </header>
+        
+        <form action="{{ url_for('main.handle_calculator_form') }}" method="POST">
+            <fieldset>
+                <legend>Transporte</legend>
+                <div class="form-group">
+                    <label for="km_carro">Distância de carro/mês (km)</label>
+                    <input type="number" id="km_carro" name="km_carro" placeholder="Ex: 600">
+                </div>
+                <div class="form-group">
+                    <label for="tipo_combustivel">Combustível</label>
+                    <select id="tipo_combustivel" name="tipo_combustivel">
+                        <option value="">Nenhum / Não uso carro</option>
+                        <option value="gasolina">Gasolina</option>
+                        <option value="etanol">Etanol</option>
+                        <option value="diesel">Diesel</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Casa</legend>
+                <div class="form-group">
+                    <label for="kwh_eletricidade">Eletricidade/mês (kWh)</label>
+                    <input type="number" id="kwh_eletricidade" name="kwh_eletricidade" placeholder="Ex: 250" required>
+                </div>
+                <div class="form-group">
+                    <label for="botijoes_gas">Botijões de gás (13kg) por mês</label>
+                    <input type="number" id="botijoes_gas" name="botijoes_gas" placeholder="Ex: 1" step="0.5">
+                </div>
+            </fieldset>
+            
+            <button type="submit" class="submit-button">Calcular e Gerar Relatório</button>
+        </form>
+        <a href="/" class="back-link">← Voltar ao Chat com a Dalva</a>
+    </div>
+</body>
+</html>
