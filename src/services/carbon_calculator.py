@@ -9,6 +9,10 @@ EMISSION_FACTORS = {
 }
 
 def calculate_footprint(data):
+    """
+    Calcula a pegada de carbono com base nos dados fornecidos.
+    'data' deve ser um dicionário.
+    """
     emissions = {
         "transporte": 0.0,
         "energia_eletrica": 0.0,

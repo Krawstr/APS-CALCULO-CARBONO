@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nila AI - CarbonBot</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <!-- Navbar superior -->
+    <div style="background-color: #202123; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #4d4d4f; position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
+        <h1 style="font-size: 1.2em; color: #ececf1; margin: 0;">🌱 CarbonBot</h1>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <span style="color: #8e8ea0; font-size: 0.9em;">Olá, <strong>{{ user.username }}</strong>!</span>
+            <a href="{{ url_for('main.dashboard') }}" style="color: #19c37d; text-decoration: none; font-size: 0.9em;">🏠 Dashboard</a>
+            <a href="{{ url_for('main.show_history') }}" style="color: #19c37d; text-decoration: none; font-size: 0.9em;">📜 Histórico</a>
+            <a href="{{ url_for('main.logout') }}" style="color: #19c37d; text-decoration: none; font-size: 0.9em;">🚪 Sair</a>
+        </div>
+    </div>
+
+    <!-- Conteúdo principal (com margin-top para não ficar atrás da navbar) -->
+    <div style="display: flex; height: 100vh; padding-top: 56px;">
+        <aside class="sidebar">
+            <button class="new-chat-button" id="new-chat-btn"><span>+</span><span>Novo Chat</span></button>
+            <div class="sidebar-history">
+                <h3>Recentes</h3>
+                <div id="history-list">
+                    <!-- Histórico será carregado aqui via JavaScript -->
+                    <p style="color: #8e8ea0; font-size: 0.85em; padding: 12px;">Carregando...</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header id="chat-header">Agente Dalva</header>
+            <div id="chat-container">
+                <div id="chat-box"></div>
+            </div>
+            <div class="input-area">
+                <form id="input-form">
+                    <input type="text" id="user-input" placeholder="Converse com a Dalva..." autocomplete="off">
+                    <button type="submit" id="send-button">↑</button>
+                </form>
+
+                <a href="{{ url_for('main.show_calculator_form') }}" class="form-redirect-link">Ir para a Calculadora Manual</a>
+
+                <p class="footer-text">O Agente pode cometer erros. Considere verificar todas as informações.</p>
+            </div>
+            <div id="report-container">
+                <h2>Sua Pegada de Carbono Mensal</h2>
+                <div style="width: 100%; max-width: 400px; margin: 20px auto;"><canvas id="footprint-chart"></canvas></div>
+                <h2>Relatório Personalizado</h2>
+                <p id="narrative-report"></p>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
