@@ -8,62 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputArea = document.querySelector('.input-area');
     const chatHeader = document.getElementById('chat-header');
     const narrativeReport = document.getElementById('narrative-report');
-    const historyList = document.getElementById('history-list');
 
-    const API_URL = window.location.origin;
-
-    // ==========================================
-    // FUNÇÕES DE HISTÓRICO
-    // ==========================================
-
-    async function loadHistory() {
-        try {
-            const response = await fetch(`${API_URL}/api/history?limit=10`);
-            const history = await response.json();
-            
-            if (history.length === 0) {
-                historyList.innerHTML = '<p class="history-empty">Nenhuma conversa ainda</p>';
-                return;
-            }
-
-            historyList.innerHTML = '';
-            history.forEach(chat => {
-                const item = document.createElement('a');
-                item.className = 'history-item';
-                item.href = `${API_URL}/history/${chat.id}`;
-                item.innerHTML = `
-                    <div class="history-item-title">
-                        📊 Relatório #${chat.id}
-                    </div>
-                    <div class="history-item-date">${chat.created_at}</div>
-                `;
-                historyList.appendChild(item);
-            });
-        } catch (error) {
-            console.error('Erro ao carregar histórico:', error);
-            historyList.innerHTML = '<p class="history-empty">Erro ao carregar</p>';
-        }
-    }
-
-    // Carrega histórico ao iniciar
-    loadHistory();
-
-    // ==========================================
-    // FUNÇÕES DO CHAT
-    // ==========================================
+    const API_URL = 'http://127.0.0.1:5000';
 
     const addMessage = (text, sender) => {
         const messageRow = document.createElement('div');
         messageRow.classList.add('message-row', `${sender}-message-row`);
-        
         const avatar = document.createElement('div');
         avatar.classList.add('avatar');
-        avatar.textContent = sender === 'user' ? 'U' : 'D';
-        
+        avatar.textContent = sender === 'user' ? 'U' : 'N';
         const messageElement = document.createElement('div');
         messageElement.classList.add('message');
         messageElement.textContent = text;
-        
         messageRow.appendChild(avatar);
         messageRow.appendChild(messageElement);
         chatBox.appendChild(messageRow);
@@ -79,10 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userInput.disabled = false;
 
         try {
-            const response = await fetch(`${API_URL}/start_conversation`, { 
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
-            });
+            const response = await fetch(`${API_URL}/start_conversation`, { method: 'POST' });
             const data = await response.json();
             addMessage(data.response, 'ai');
         } catch (error) {
@@ -90,17 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    newChatBtn.addEventListener('click', async () => {
-        // Limpa a conversa atual
-        await fetch(`${API_URL}/api/clear_conversation`, { method: 'POST' });
-        startConversation();
-    });
+    newChatBtn.addEventListener('click', startConversation);
 
     inputForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         const userText = userInput.value.trim();
         if (!userText) return;
-        
         addMessage(userText, 'user');
         userInput.value = '';
 
@@ -130,26 +78,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const generateReport = async () => {
         addMessage("Gerando seu relatório, um momento...", 'ai');
         try {
-            const response = await fetch(`${API_URL}/generate_report`, { 
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
-            });
+            const response = await fetch(`${API_URL}/generate_report`, { method: 'POST' });
             const data = await response.json();
 
-            if (data.status === 'success') {
-                // Redireciona para a página de relatório
-                window.location.href = data.redirect_url;
-                
-                // Atualiza o histórico na sidebar
-                loadHistory();
-            } else {
-                addMessage('Erro ao gerar relatório.', 'ai');
-            }
+            chatHeader.style.display = 'none';
+            chatContainer.style.display = 'none';
+            inputArea.style.display = 'none';
+            reportContainer.style.display = 'block';
+
+            narrativeReport.innerText = data.narrative_report;
+            const ctx = document.getElementById('footprint-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(data.data_for_dashboard.details_kg_co2e),
+                    datasets: [{
+                        data: Object.values(data.data_for_dashboard.details_kg_co2e),
+                        backgroundColor: ['#7e57c2', '#19c37d', '#fbc02d'],
+                        borderColor: '#343541',
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top', labels: { color: '#ececf1' } },
+                        title: { display: true, text: `Total: ${data.data_for_dashboard.total_kg_co2e} kg CO2e`, color: '#ececf1' }
+                    }
+                }
+            });
         } catch (error) {
             addMessage('Ocorreu um erro ao gerar seu relatório.', 'ai');
         }
     };
 
-    // Inicia a conversa automaticamente
     startConversation();
 });
