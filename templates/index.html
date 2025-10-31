@@ -2,21 +2,51 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CarbonBot</title>
+    <title>Nila AI</title>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
+    <div class="user-menu">
+        <img id="user-avatar" class="user-avatar"
+            src="{{ url_for('static', filename='uploads/avatars/' + current_user.profile_picture) }}" alt="Avatar"
+            onclick="toggleDropdown()">
+
+        <div id="dropdown-menu" class="dropdown-menu">
+            <div class="dropdown-header">
+                <strong>{{ current_user.username }}</strong>
+                <small>{{ current_user.email }}</small>
+            </div>
+            <a href="{{ url_for('main.profile') }}">👤 Meu Perfil</a>
+            <a href="{{ url_for('main.view_history') }}">📊 Histórico</a>
+            <a href="{{ url_for('main.show_calculator_form') }}">🧮 Calculadora</a>
+            <div class="dropdown-divider"></div>
+            <a href="{{ url_for('main.logout') }}">🚪 Sair</a>
+        </div>
+    </div>
+
     <aside class="sidebar">
-        <button class="new-chat-button" id="new-chat-btn"><span>+</span><span>Novo Chat</span></button>
+        <button class="new-chat-button" id="new-chat-btn">
+            <span>+</span>
+            <span>Novo Chat</span>
+        </button>
         <div class="sidebar-history">
-            <h3>Recentes</h3>
+            <h3>Menu</h3>
+            <a href="{{ url_for('main.view_history') }}">📊 Histórico de Relatórios</a>
+            <a href="{{ url_for('main.show_calculator_form') }}">🧮 Calculadora Manual</a>
         </div>
     </aside>
 
@@ -31,17 +61,21 @@
                 <button type="submit" id="send-button">↑</button>
             </form>
 
-            <a href="{{ url_for('main.show_calculator_form') }}" class="form-redirect-link">Ir para a Calculadora Manual</a>
+            <div id="button-container"></div>
+            <p class="footer-text">O Agente pode cometer erros. Considere verificar todas as informações.
+            </p>
 
-            <p class="footer-text">O Agente pode cometer erros. Considere verificar todas as informações.</p>
         </div>
         <div id="report-container">
             <h2>Sua Pegada de Carbono Mensal</h2>
-            <div style="width: 100%; max-width: 400px; margin: 20px auto;"><canvas id="footprint-chart"></canvas></div>
+            <div style="width: 100%; max-width: 400px; margin: 20px auto;">
+                <canvas id="footprint-chart"></canvas>
+            </div>
             <h2>Relatório Personalizado</h2>
             <p id="narrative-report"></p>
         </div>
     </main>
+
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>

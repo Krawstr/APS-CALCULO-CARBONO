@@ -31,38 +31,7 @@
 
     <script>
         const reportData = JSON.parse('{{ report_data | tojson | safe }}');
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const ctx = document.getElementById('footprint-chart').getContext('2d');
-            
-            const chartDetails = reportData.data_for_dashboard.details_kg_co2e;
-            const totalEmissions = reportData.data_for_dashboard.total_kg_co2e;
-
-            new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(chartDetails),
-                    datasets: [{
-                        data: Object.values(chartDetails),
-                        backgroundColor: ['#7e57c2', '#19c37d', '#fbc02d', '#ff6384'],
-                        borderColor: '#2a2b32', // Cor de fundo da página
-                        borderWidth: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { position: 'top', labels: { color: '#ececf1', font: { size: 14 } } },
-                        title: { 
-                            display: true, 
-                            text: `Total: ${totalEmissions} kg CO2e`, 
-                            color: '#ececf1',
-                            font: { size: 18 }
-                        }
-                    }
-                }
-            });
-        });
     </script>
+    <script src="{{ url_for('static', filename='calculator.js') }}"></script>
 </body>
 </html>

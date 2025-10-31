@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Nila AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <header class="form-header">
+            <h1>Cadastro</h1>
+            <p>Crie sua conta</p>
+        </header>
+        
+        <div id="message"></div>
+        
+        <form id="register-form">
+            <div class="form-group">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" required minlength="6">
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm_password">Confirme a Senha</label>
+                <input type="password" id="confirm_password" name="confirm_password" required minlength="6">
+            </div>
+
+            <button type="submit" class="submit-button">Cadastrar</button>
+        </form>
+        
+        <p>Já tem conta? <a href="{{ url_for('main.login') }}">Faça login</a></p>
+    </div>
+    
+    <script src="{{ url_for('static', filename='register.js') }}"></script>
+</body>
+</html>
