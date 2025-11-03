@@ -43,7 +43,6 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
     
-    # Configurar API do Google
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
         print("⚠️ Erro: A variável GOOGLE_API_KEY não foi definida.")

@@ -11,8 +11,6 @@ from src.models import db, User, Report
 from datetime import datetime
 from flask import current_app
 
-
-
 routes = Blueprint('main', __name__)
 
 conversation_history = []
@@ -84,14 +82,11 @@ def generate_report():
     """
     
     try:
-        # --- CORREÇÃO 1: Nome do modelo corrigido ---
         model = genai.GenerativeModel('gemini-2.0-flash') 
         
-        # --- CORREÇÃO 2: Bloco try/except para a chamada da API ---
         response_json_str = model.generate_content(extraction_prompt).text
         
     except Exception as e:
-        # Captura erros da API (modelo inválido, chave errada, etc.)
         print(f"Erro na API Gemini (Extração): {e}")
         return jsonify({"error": "Não foi possível contatar a IA para extrair dados."}), 500
 
@@ -105,11 +100,8 @@ def generate_report():
             raise json.JSONDecodeError("Nenhum JSON encontrado na resposta", response_json_str, 0)
     except json.JSONDecodeError as e:
         print(f"Erro de JSON Decode: {e}")
-        # Retorna o erro que você já tinha, o que é ótimo
         return jsonify({"error": "Não foi possível extrair os dados da conversa."}), 500
 
-    # ... (Seu código de sanitização de dados continua aqui) ...
-    # (O código de sanitização parece correto)
     sanitized_data = {}
     for key, value in extracted_data.items():
         if value is None:
@@ -154,9 +146,6 @@ def generate_report():
         # Vamos retornar um erro para o usuário saber.
         return jsonify({"error": "Os dados foram calculados, mas falhamos ao gerar o relatório narrativo."}), 500
 
-    
-    # ... (Seu código de salvar no DB continua aqui) ...
-    # (Parece correto)
     try:
         new_report = Report(
             user_id=current_user.id,
@@ -226,7 +215,6 @@ def handle_calculator_form():
     model = genai.GenerativeModel('gemini-2.0-flash')
     text_report = model.generate_content(report_prompt).text
     
-    # NOVO: Salvar relatório no banco de dados
     new_report = Report(
         user_id=current_user.id,
         km_carro=sanitized_data.get('km_carro'),
