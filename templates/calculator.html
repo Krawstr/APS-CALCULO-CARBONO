@@ -9,29 +9,67 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='calculator.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="report-container">
         <header class="report-header">
-            <h1>Sua Pegada de Carbono Mensal</h1>
-            <p>Com base nas informações fornecidas, este é o resumo das suas emissões.</p>
+            <h1>🌱 Sua Pegada de Carbono Mensal</h1>
+            <p>Análise completa com recomendações de compensação</p>
         </header>
 
+        <!-- Gráfico -->
         <div class="chart-area">
             <canvas id="footprint-chart"></canvas>
         </div>
 
-        <div class="narrative-area">
-            <h2>Relatório Personalizado</h2>
-            <p id="narrative-report">{{ report_data.narrative_report }}</p>
+        <!-- Cards com resumo rápido -->
+        <div class="summary-cards">
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <div class="card-content">
+                    <h3>Total Mensal</h3>
+                    <p class="card-value">{{ "%.2f"|format(report_data.data_for_dashboard.total_kg_co2e) }} kg CO2e</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🌳</div>
+                <div class="card-content">
+                    <h3>Árvores/Ano</h3>
+                    <p class="card-value">{{ (report_data.data_for_dashboard.total_kg_co2e * 12 / 22) | int }} árvores</p>
+                    <small>Para compensar sua pegada</small>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">💰</div>
+                <div class="card-content">
+                    <h3>Compensação Anual</h3>
+                    <p class="card-value">R$ {{ "%.2f"|format((report_data.data_for_dashboard.total_kg_co2e * 12 / 1000) * 50) }}</p>
+                    <small>Custo médio estimado</small>
+                </div>
+            </div>
         </div>
 
-        <a href="/" class="back-button">← Voltar ao Chat</a>
+        <!-- Relatório narrativo -->
+        <div class="narrative-area">
+            <h2>📋 Relatório Personalizado</h2>
+            <div id="narrative-report"></div>
+        </div>
+
+        <!-- Botões de ação -->
+        <div class="action-buttons">
+            <a href="/" class="back-button primary">← Nova Conversa</a>
+            <a href="{{ url_for('main.view_history') }}" class="back-button secondary">📊 Ver Histórico</a>
+            <a href="{{ url_for('main.learn_more') }}" class="back-button info">📚 Saiba Mais</a>
+        </div>
     </div>
 
-    <script>
-        const reportData = JSON.parse('{{ report_data | tojson | safe }}');
+    <script id="report-data" type="application/json">
+        {{ report_data | tojson | safe }}
     </script>
+    
     <script src="{{ url_for('static', filename='calculator.js') }}"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 
 from src.models import db, User
-from routes.routes import routes as main_routes
+from routes import routes as main_routes  
 
 # Configuração de upload
 UPLOAD_FOLDER = 'static/uploads/avatars'
@@ -43,6 +43,7 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
     
+    # Configurar API do Google
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
         print("⚠️ Erro: A variável GOOGLE_API_KEY não foi definida.")

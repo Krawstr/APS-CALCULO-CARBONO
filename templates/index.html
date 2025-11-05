@@ -1,83 +1,147 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carbon Bot</title>
-
+    <title>Carbon Bot - Pegada de Carbono</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
-    <div class="user-menu">
-        <img id="user-avatar" class="user-avatar"
-            src="{{ url_for('static', filename='uploads/avatars/' + current_user.profile_picture) }}" alt="Avatar"
-            onclick="toggleDropdown()">
+    <!-- Botão menu mobile hamburguer -->
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+    
+    <!-- Overlay para fechar sidebar no mobile -->
+    <div class="sidebar-overlay" onclick="closeSidebar()"></div>
 
-        <div id="dropdown-menu" class="dropdown-menu">
-            <div class="dropdown-header">
-                <strong>{{ current_user.username }}</strong>
-                <small>{{ current_user.email }}</small>
-            </div>
-            <a href="{{ url_for('main.profile') }}">👤 Meu Perfil</a>
-            <a href="{{ url_for('main.view_history') }}">📊 Histórico</a>
-            <a href="{{ url_for('main.show_calculator_form') }}">🧮 Calculadora</a>
-            <div class="dropdown-divider"></div>
-            <a href="{{ url_for('main.logout') }}">🚪 Sair</a>
-        </div>
-    </div>
-
+    <!-- Sidebar Navigation -->
     <aside class="sidebar">
         <button class="new-chat-button" id="new-chat-btn">
             <span>+</span>
             <span>Novo Chat</span>
         </button>
+        
         <div class="sidebar-history">
-            <h3>Menu</h3>
+            <h3>📋 Menu</h3>
             <a href="{{ url_for('main.view_history') }}">📊 Histórico de Relatórios</a>
             <a href="{{ url_for('main.show_calculator_form') }}">🧮 Calculadora Manual</a>
+            <a href="{{ url_for('main.learn_more') }}">📚 Saiba Mais</a>
+            <a href="{{ url_for('main.profile') }}">👤 Meu Perfil</a>
         </div>
     </aside>
 
+    <!-- Main Content -->
     <main class="main-content">
-        <header id="chat-header">Agente</header>
+        <!-- Header com Avatar -->
+        <header id="chat-header">
+            <div class="header-title">Agente</div>
+            
+            <!-- User Menu Dropdown -->
+            <div class="user-menu">
+                <img 
+                    id="user-avatar" 
+                    class="user-avatar" 
+                    src="{{ url_for('static', filename='uploads/avatars/' + current_user.profile_picture) }}" 
+                    alt="Avatar"
+                    onclick="toggleDropdown()"
+                    title="Menu de usuário"
+                >
+                
+                <div id="dropdown-menu" class="dropdown-menu">
+                    <div class="dropdown-header">
+                        <strong>{{ current_user.username }}</strong>
+                        <small>{{ current_user.email }}</small>
+                    </div>
+                    <a href="{{ url_for('main.profile') }}">👤 Meu Perfil</a>
+                    <a href="{{ url_for('main.view_history') }}">📊 Histórico</a>
+                    <a href="{{ url_for('main.show_calculator_form') }}">🧮 Calculadora</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{{ url_for('main.logout') }}" style="color: var(--accent-red);">🚪 Sair</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Chat Container -->
         <div id="chat-container">
             <div id="chat-box"></div>
         </div>
+
+        <!-- Input Area -->
         <div class="input-area">
             <form id="input-form">
-                <input type="text" id="user-input" placeholder="Converse com a Dalva..." autocomplete="off">
-                <button type="submit" id="send-button">↑</button>
+                <input 
+                    type="text" 
+                    id="user-input" 
+                    placeholder="Converse com a Dalva..." 
+                    autocomplete="off"
+                    required
+                >
+                <button type="submit" id="send-button" aria-label="Enviar mensagem">↑</button>
             </form>
-
-            <div id="button-container"></div>
-            <p class="footer-text">O Agente pode cometer erros. Considere verificar todas as informações.
-            </p>
-
+            <p class="footer-text">O Agente pode cometer erros. Considere verificar todas as informações.</p>
         </div>
+
+        <!-- Report Container -->
         <div id="report-container">
-            <h2>Sua Pegada de Carbono Mensal</h2>
-            <div style="width: 100%; max-width: 400px; margin: 20px auto;">
-                <canvas id="footprint-chart"></canvas>
+            <div class="report-wrapper">
+                <h2>🌱 Sua Pegada de Carbono Mensal</h2>
+                
+                <div class="chart-area">
+                    <canvas id="footprint-chart"></canvas>
+                </div>
+
+                <div class="summary-cards">
+                    <div class="card">
+                        <div class="card-icon">📊</div>
+                        <div class="card-content">
+                            <h3>Total Mensal</h3>
+                            <p class="card-value" id="total-monthly">0 kg</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">🌳</div>
+                        <div class="card-content">
+                            <h3>Árvores/Ano</h3>
+                            <p class="card-value" id="trees-yearly">0</p>
+                            <small>Para compensar</small>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">💰</div>
+                        <div class="card-content">
+                            <h3>Compensação</h3>
+                            <p class="card-value" id="annual-cost">R$ 0</p>
+                            <small>Custo médio/ano</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="narrative-area">
+                    <h2>📋 Relatório Personalizado</h2>
+                    <div id="narrative-report"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <button onclick="location.reload()" class="back-button primary">
+                        ← Nova Conversa
+                    </button>
+                    <a href="{{ url_for('main.view_history') }}" class="back-button secondary">
+                        📊 Ver Histórico
+                    </a>
+                    <a href="{{ url_for('main.learn_more') }}" class="back-button info">
+                        📚 Saiba Mais
+                    </a>
+                </div>
             </div>
-            <h2>Relatório Personalizado</h2>
-            <p id="narrative-report"></p>
         </div>
     </main>
 
-
+    <!-- Scripts -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
-
 </html>

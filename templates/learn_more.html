@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entenda - Pegada de Carbono</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='learn.css') }}">
+</head>
+<body>
+    <div class="learn-container">
+        <header class="learn-header">
+            <h1>🌍 Entenda a Pegada de Carbono</h1>
+            <p>Guia completo sobre emissões, impactos e soluções</p>
+        </header>
+
+        <nav class="learn-nav">
+            <a href="#o-que-e">O que é?</a>
+            <a href="#por-que-importa">Por que importa?</a>
+            <a href="#creditos">Créditos de Carbono</a>
+            <a href="#compensar">Como Compensar</a>
+            <a href="#acoes">Ações Práticas</a>
+        </nav>
+
+        <main class="learn-content">
+            <!-- O que é Pegada de Carbono -->
+            <section id="o-que-e" class="learn-section">
+                <h2>🔍 O que é Pegada de Carbono?</h2>
+                
+                <div class="content-block">
+                    <p>A <strong>pegada de carbono</strong> é a quantidade total de gases de efeito estufa (GEE) emitidos direta ou indiretamente por uma pessoa, organização, evento ou produto. É medida em equivalentes de dióxido de carbono (CO2e).</p>
+                    
+                    <div class="info-box">
+                        <h4>💡 Por que CO2 equivalente?</h4>
+                        <p>Existem vários gases de efeito estufa (metano, óxido nitroso, etc.), mas usamos CO2e para padronizar as medições. Por exemplo, 1 kg de metano equivale a 25 kg de CO2 em termos de impacto no aquecimento global.</p>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Principais Fontes de Emissão</h3>
+                    <div class="grid-2">
+                        <div class="card-info">
+                            <span class="card-emoji">🚗</span>
+                            <h4>Transporte</h4>
+                            <p>Carros, ônibus, aviões e outros veículos movidos a combustíveis fósseis.</p>
+                            <ul>
+                                <li>Gasolina: ~2.3 kg CO2e/litro</li>
+                                <li>Diesel: ~2.7 kg CO2e/litro</li>
+                                <li>Etanol: ~1.5 kg CO2e/litro</li>
+                            </ul>
+                        </div>
+
+                        <div class="card-info">
+                            <span class="card-emoji">💡</span>
+                            <h4>Energia</h4>
+                            <p>Eletricidade gerada por termelétricas e outras fontes não renováveis.</p>
+                            <ul>
+                                <li>Brasil: ~0.0817 kg CO2e/kWh (média)</li>
+                                <li>Varia conforme a matriz energética</li>
+                                <li>Energia solar/eólica: ~0 emissões</li>
+                            </ul>
+                        </div>
+
+                        <div class="card-info">
+                            <span class="card-emoji">🏠</span>
+                            <h4>Gás de Cozinha</h4>
+                            <p>GLP (gás liquefeito de petróleo) usado no dia a dia.</p>
+                            <ul>
+                                <li>GLP: ~3.02 kg CO2e/kg</li>
+                                <li>1 botijão (13kg): ~39.26 kg CO2e</li>
+                            </ul>
+                        </div>
+
+                        <div class="card-info">
+                            <span class="card-emoji">🍔</span>
+                            <h4>Alimentação</h4>
+                            <p>Produção, processamento e transporte de alimentos.</p>
+                            <ul>
+                                <li>Carne vermelha: alto impacto</li>
+                                <li>Vegetais locais: baixo impacto</li>
+                                <li>Alimentos processados: médio impacto</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Por que importa -->
+            <section id="por-que-importa" class="learn-section">
+                <h2>🌡️ Por que a Pegada de Carbono Importa?</h2>
+                
+                <div class="content-block">
+                    <p>O excesso de gases de efeito estufa na atmosfera está causando o <strong>aquecimento global</strong>, que resulta em:</p>
+                    
+                    <div class="grid-3">
+                        <div class="impact-card">
+                            <span class="impact-icon">🌊</span>
+                            <h4>Aumento do Nível do Mar</h4>
+                            <p>Degelo das calotas polares ameaça cidades costeiras</p>
+                        </div>
+                        
+                        <div class="impact-card">
+                            <span class="impact-icon">🔥</span>
+                            <h4>Eventos Climáticos Extremos</h4>
+                            <p>Secas, enchentes e incêndios mais frequentes</p>
+                        </div>
+                        
+                        <div class="impact-card">
+                            <span class="impact-icon">🐾</span>
+                            <h4>Perda de Biodiversidade</h4>
+                            <p>Extinção de espécies e destruição de ecossistemas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert-box warning">
+                    <strong>⚠️ Meta Global:</strong> Limitar o aquecimento a 1.5°C acima dos níveis pré-industriais até 2100. Para isso, precisamos reduzir as emissões globais em <strong>45% até 2030</strong>.
+                </div>
+            </section>
+
+            <!-- Créditos de Carbono -->
+            <section id="creditos" class="learn-section">
+                <h2>💳 O que são Créditos de Carbono?</h2>
+                
+                <div class="content-block">
+                    <p>Um <strong>crédito de carbono</strong> representa a remoção ou não emissão de 1 tonelada (1.000 kg) de CO2 equivalente da atmosfera.</p>
+                    
+                    <h3>Como Funcionam?</h3>
+                    <ol class="steps-list">
+                        <li>
+                            <strong>Projetos de Redução:</strong> Organizações desenvolvem projetos que reduzem ou capturam CO2 (ex: reflorestamento, energia renovável)
+                        </li>
+                        <li>
+                            <strong>Certificação:</strong> Projetos são auditados e certificados por entidades independentes (Verra, Gold Standard, etc.)
+                        </li>
+                        <li>
+                            <strong>Comercialização:</strong> Créditos são vendidos para empresas ou pessoas que querem compensar suas emissões
+                        </li>
+                        <li>
+                            <strong>Impacto Real:</strong> O dinheiro financia projetos ambientais concretos
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="content-block">
+                    <h3>Tipos de Projetos</h3>
+                    <div class="grid-2">
+                        <div class="project-card">
+                            <h4>🌳 Reflorestamento e REDD+</h4>
+                            <p>Plantio de árvores e proteção de florestas existentes. Uma árvore captura cerca de 22 kg de CO2 por ano.</p>
+                        </div>
+                        
+                        <div class="project-card">
+                            <h4>⚡ Energia Renovável</h4>
+                            <p>Substituição de energia fóssil por solar, eólica ou hídrica.</p>
+                        </div>
+                        
+                        <div class="project-card">
+                            <h4>♻️ Gestão de Resíduos</h4>
+                            <p>Captura de metano de aterros sanitários e compostagem.</p>
+                        </div>
+                        
+                        <div class="project-card">
+                            <h4>🚜 Agricultura Sustentável</h4>
+                            <p>Técnicas que reduzem emissões e sequestram carbono no solo.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Como Compensar -->
+            <section id="compensar" class="learn-section">
+                <h2>🤝 Como Compensar sua Pegada?</h2>
+                
+                <div class="content-block">
+                    <h3>Organizações Confiáveis no Brasil</h3>
+                    
+                    <div class="org-card">
+                        <div class="org-header">
+                            <h4>🌳 SOS Mata Atlântica</h4>
+                            <a href="https://sosma.org.br" target="_blank" class="org-link">sosma.org.br →</a>
+                        </div>
+                        <p><strong>Foco:</strong> Restauração da Mata Atlântica</p>
+                        <p><strong>Custo:</strong> R$ 30-50 por tonelada CO2e</p>
+                        <p><strong>Impacto:</strong> Mais de 40 milhões de árvores plantadas</p>
+                    </div>
+
+                    <div class="org-card">
+                        <div class="org-header">
+                            <h4>🌱 Iniciativa Verde</h4>
+                            <a href="https://iniciativaverde.org.br" target="_blank" class="org-link">iniciativaverde.org.br →</a>
+                        </div>
+                        <p><strong>Foco:</strong> Plantio de espécies nativas e educação ambiental</p>
+                        <p><strong>Custo:</strong> R$ 40-60 por tonelada CO2e</p>
+                        <p><strong>Impacto:</strong> Projetos em 14 estados brasileiros</p>
+                    </div>
+
+                    <div class="org-card">
+                        <div class="org-header">
+                            <h4>💚 Moss.Earth</h4>
+                            <a href="https://moss.earth" target="_blank" class="org-link">moss.earth →</a>
+                        </div>
+                        <p><strong>Foco:</strong> Preservação da Amazônia via blockchain</p>
+                        <p><strong>Custo:</strong> R$ 50-80 por tonelada CO2e</p>
+                        <p><strong>Impacto:</strong> Tecnologia transparente e rastreável</p>
+                    </div>
+
+                    <div class="org-card">
+                        <div class="org-header">
+                            <h4>🌍 Eccaplan</h4>
+                            <a href="https://eccaplan.com.br" target="_blank" class="org-link">eccaplan.com.br →</a>
+                        </div>
+                        <p><strong>Foco:</strong> Consultoria e projetos corporativos</p>
+                        <p><strong>Custo:</strong> R$ 35-55 por tonelada CO2e</p>
+                        <p><strong>Impacto:</strong> Certificações internacionais</p>
+                    </div>
+                </div>
+
+                <div class="calculator-box">
+                    <h3>💰 Calcule seu Investimento</h3>
+                    <p>Para uma pegada média brasileira de <strong>120 kg CO2e/mês</strong> (1.440 kg/ano):</p>
+                    <ul>
+                        <li><strong>Compensação anual:</strong> R$ 57 a R$ 86 reais</li>
+                        <li><strong>Equivalente a:</strong> Cerca de 66 árvores plantadas</li>
+                        <li><strong>Menos de:</strong> R$ 8 por mês</li>
+                    </ul>
+                    <p class="highlight">É menos do que um lanche! 🍔</p>
+                </div>
+            </section>
+
+            <!-- Ações Práticas -->
+            <section id="acoes" class="learn-section">
+                <h2>✅ Ações Práticas para Reduzir sua Pegada</h2>
+                
+                <div class="actions-grid">
+                    <div class="action-category">
+                        <h3>🚗 Transporte</h3>
+                        <ul>
+                            <li>Use transporte público, bicicleta ou carona compartilhada</li>
+                            <li>Prefira carros elétricos ou híbridos</li>
+                            <li>Combine viagens para reduzir deslocamentos</li>
+                            <li>Evite voos quando possível (1 voo SP-RJ = ~100 kg CO2e)</li>
+                            <li>Mantenha pneus calibrados e motor regulado</li>
+                        </ul>
+                    </div>
+
+                    <div class="action-category">
+                        <h3>💡 Energia</h3>
+                        <ul>
+                            <li>Troque lâmpadas por LED (75% menos energia)</li>
+                            <li>Desligue aparelhos da tomada</li>
+                            <li>Use energia solar se possível</li>
+                            <li>Ajuste ar-condicionado para 23-24°C</li>
+                            <li>Seque roupas no varal ao invés da secadora</li>
+                        </ul>
+                    </div>
+
+                    <div class="action-category">
+                        <h3>🍽️ Alimentação</h3>
+                        <ul>
+                            <li>Reduza consumo de carne vermelha</li>
+                            <li>Compre alimentos locais e da estação</li>
+                            <li>Evite desperdício de comida</li>
+                            <li>Prefira produtos orgânicos</li>
+                            <li>Faça compostagem de resíduos orgânicos</li>
+                        </ul>
+                    </div>
+
+                    <div class="action-category">
+                        <h3>♻️ Consumo</h3>
+                        <ul>
+                            <li>Reduza, reutilize, recicle (nessa ordem!)</li>
+                            <li>Evite plástico descartável</li>
+                            <li>Compre produtos duráveis</li>
+                            <li>Doe e compre usado</li>
+                            <li>Escolha marcas sustentáveis</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Final -->
+            <section class="cta-section">
+                <h2>🌱 Pronto para Agir?</h2>
+                <p>Calcule sua pegada de carbono e descubra como você pode fazer a diferença!</p>
+                <div class="cta-buttons">
+                    <a href="/" class="btn-primary">Calcular Agora</a>
+                    <a href="{{ url_for('main.show_calculator_form') }}" class="btn-secondary">Calculadora Manual</a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="learn-footer">
+            <p>Feito com 💚 para um futuro mais sustentável</p>
+            <a href="/" class="back-link">← Voltar ao Chat</a>
+        </footer>
+    </div>
+</body>
+</html>
