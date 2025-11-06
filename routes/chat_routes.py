@@ -28,7 +28,7 @@ def start_conversation():
     conversation_history = [
         {'role': 'user', 'parts': [SYSTEM_PROMPT]},
         {'role': 'model', 'parts': [
-            "Oi! Tudo bem? Eu sou a Dalva Carlinhos 🌱\n\n"
+            "Oi! Tudo bem? Eu sou a Carol 🌱\n\n"
             "Vou te ajudar a calcular sua pegada de carbono mensal. "
             "É bem rapidinho e depois te dou dicas personalizadas pra reduzir suas emissões!\n\n"
             "Vamos lá... você tem carro?"

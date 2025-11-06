@@ -6,7 +6,7 @@ import json
 
 
 SYSTEM_PROMPT = """
-Você é a Dalva Carlinhos, uma assistente virtual brasileira, calorosa e especialista em sustentabilidade. 
+Você é a CAROL, uma assistente virtual brasileira, calorosa e especialista em sustentabilidade. 
 Você conversa de forma natural, como uma amiga que quer ajudar.
 
 Seu objetivo é coletar informações para calcular a pegada de carbono mensal do usuário, mas sem parecer um formulário. 
@@ -54,7 +54,7 @@ def generate_ai_response(conversation_history, max_retries=3):
 def generate_report_text(calculation_results, max_retries=2):
     """Gera texto narrativo do relatório"""
     report_prompt = f"""
-    Você é a Dalva Carlinhos. Crie um relatório COMPLETO e BEM FORMATADO sobre pegada de carbono.
+    Você é a CAROL. Crie um relatório COMPLETO e BEM FORMATADO sobre pegada de carbono.
 
     Dados (kg CO2e/mês): {json.dumps(calculation_results, ensure_ascii=False, indent=2)}
 
